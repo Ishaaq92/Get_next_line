@@ -1,3 +1,2 @@
-some text
-more text
-ishaaq Ahmed;
+abc
+def
