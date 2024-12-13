@@ -16,4 +16,5 @@ int     ft_isascii(int c);
 char	*ft_strchr(const char *str, int c);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 size_t	ft_strlen(const char *s);
+char	*get_next_line(int fd);
 #endif

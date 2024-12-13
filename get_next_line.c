@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isahmed <isahmed@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ishaaq <ishaaq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 11:43:18 by ishaaq            #+#    #+#             */
-/*   Updated: 2024/12/11 17:00:44 by isahmed          ###   ########.fr       */
+/*   Updated: 2024/12/13 18:51:56 by ishaaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,27 +20,6 @@ size_t	ft_strlen(const char *s)
 	while (s[i] != 0)
 		i ++;
 	return (i);
-}
-char	*ft_substr(char const *s, unsigned int start, size_t len)
-{
-	size_t	i;
-	char	*ptr;
-
-	if (ft_strlen(s) <= start)
-		len = 0;
-	if (len > ft_strlen(s) - start)
-		len = ft_strlen(s) - start;
-	i = 0;
-	ptr = malloc(sizeof(char) * (len + 1));
-	if (!ptr)
-		return (NULL);
-	while (i < len && s[start + i] != '\0')
-	{
-		ptr[i] = s[start + i];
-		i ++;
-	}
-	ptr[i] = '\0';
-	return (ptr);
 }
 int	ft_strrchri(const char *s, int c, int start)
 {
@@ -127,7 +106,6 @@ char	*get_next_line(int fd)
 	{
 		buffer[num_read] = '\0';
 		text = extend(text, buffer, num_read);
-		printf("(%s)", text);
 		if (!text)
 		{
 			free(text);
@@ -136,7 +114,6 @@ char	*get_next_line(int fd)
 
 		if ((newline_pos = ft_strrchri(text, '\n', start)) >= 0)
 		{
-			printf("(%d)", newline_pos);
 			if (start == 0)
 				newline_pos = ft_strchri(text, '\n', start);
 			line = ft_substr(text, start, countsubstr(text, start, '\n') + 1);
@@ -157,27 +134,27 @@ char	*get_next_line(int fd)
 	return NULL; // No more content to read
 }
 
-int main(int ac, char *av[])
-{
-	if (ac < 2)
-	{
-		printf("Usage: %s <filename>\n", av[0]);
-		return (1);
-	}
+// int main(int ac, char *av[])
+// {
+// 	if (ac < 2)
+// 	{
+// 		printf("Usage: %s <filename>\n", av[0]);
+// 		return (1);
+// 	}
 
-	int fd = open(av[1], O_RDONLY);
-	if (fd < 0)
-	{
-		perror("Error opening file");
-		return (1);
-	}
+// 	int fd = open(av[1], O_RDONLY);
+// 	if (fd < 0)
+// 	{
+// 		perror("Error opening file");
+// 		return (1);
+// 	}
 
-	char *line;
-	while ((line = get_next_line(fd)) != NULL)
-	{
-		printf("%s", line); // Print the line (newlines are preserved)
-		free(line);         // Free each line after use
-	}
-	close(fd);
-	return (0);
-}
+// 	char *line;
+// 	while ((line = get_next_line(fd)) != NULL)
+// 	{
+// 		printf("%s", line); // Print the line (newlines are preserved)
+// 		free(line);         // Free each line after use
+// 	}
+// 	close(fd);
+// 	return (0);
+// }
